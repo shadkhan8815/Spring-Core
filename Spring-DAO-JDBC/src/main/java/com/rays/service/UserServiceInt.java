@@ -5,5 +5,9 @@ import com.rays.dto.UserDTO;
 public interface UserServiceInt {
 	
 	public long add(UserDTO dto) ;
+	
+	public void update(UserDTO dto);
+	
+	public void delelte(UserDTO dto);
 
 }

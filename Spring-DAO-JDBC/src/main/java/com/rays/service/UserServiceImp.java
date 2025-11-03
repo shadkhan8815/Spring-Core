@@ -20,5 +20,17 @@ public class UserServiceImp implements UserServiceInt {
 		long pk = dao.add(dto);
 		return pk ;
 	}
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void update(UserDTO dto) {
+
+		  dao.update(dto);
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void delelte(UserDTO dto) {
+		
+		dao.delete(dto);
+	}
 
 }

@@ -30,11 +30,20 @@ public class UserDAOImp implements UserDAOInt {
 	}
 
 	public void update(UserDTO dto) {
-		
-		String sql = "update st_user set firstName = ?, lastName = ?, login = ?, password = ?, where id = ?";
 
-		int pk = jdbcTemplate.update(sql, dto.getFirstName(), dto.getLastName(), dto.getLogin(),
-				dto.getPassword(), dto.getId());
-		
+		String sql = "update st_user set firstName = ?, lastName = ?, login = ?, password = ? where id = ?";
+
+		int pk = jdbcTemplate.update(sql, dto.getFirstName(), dto.getLastName(), dto.getLogin(), dto.getPassword(),
+				dto.getId());
+
+	}
+
+	public void delete(UserDTO dto) {
+
+		String sql = "delete from st_user where id = ?";
+
+		int pk = jdbcTemplate.update(sql, dto.getId(), dto.getFirstName(), dto.getLastName(), dto.getLogin(),
+				dto.getPassword());
+
 	}
 }
