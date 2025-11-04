@@ -3,6 +3,7 @@ package com.rays.dao;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +20,15 @@ public class UserDAOImp implements UserDAOInt {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public long add(UserDTO dto) {
+	public long add(UserDTO dto) throws Exception {
+		
+		UserDTO existLogin = findByLogin(dto.getLogin());
+		
+		if (existLogin != null) {
+			 
+			throw new Exception("Duplicate Record Exception :-> " +" Email Id Already Exist");
+			
+		} 
 
 		String sql = "insert into st_user values(?,?,?,?,?)";
 
@@ -33,8 +42,10 @@ public class UserDAOImp implements UserDAOInt {
 
 		String sql = "update st_user set firstName = ?, lastName = ?, login = ?, password = ? where id = ?";
 
-		int pk = jdbcTemplate.update(sql, dto.getFirstName(), dto.getLastName(), dto.getLogin(), dto.getPassword(),
+		int i = jdbcTemplate.update(sql, dto.getFirstName(), dto.getLastName(), dto.getLogin(), dto.getPassword(),
 				dto.getId());
+		
+		System.out.println("Data Updated: " + i);
 
 	}
 
@@ -42,8 +53,25 @@ public class UserDAOImp implements UserDAOInt {
 
 		String sql = "delete from st_user where id = ?";
 
-		int pk = jdbcTemplate.update(sql, dto.getId(), dto.getFirstName(), dto.getLastName(), dto.getLogin(),
-				dto.getPassword());
+		int i = jdbcTemplate.update(sql, dto.getId());
 
+		System.out.println("Data Deleted: " + i);
+	}
+	
+	public UserDTO findByLogin(String login) {
+		
+		UserDTO user = null ;
+		
+		try {
+			String sql = "select * from st_user where login = ?";
+			
+			Object[] param = {login} ;
+			
+			 user = jdbcTemplate.queryForObject(sql, param, new UserMapper());
+			
+		} catch (EmptyResultDataAccessException e) {
+			return null ;
+		}
+		return user ;
 	}
 }

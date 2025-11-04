@@ -15,7 +15,7 @@ public class UserServiceImp implements UserServiceInt {
 	private UserDAOInt dao ;
 	
 	@Transactional(propagation = Propagation.REQUIRED)
-	public long add(UserDTO dto) {
+	public long add(UserDTO dto) throws Exception {
 		
 		long pk = dao.add(dto);
 		return pk ;
@@ -31,6 +31,12 @@ public class UserServiceImp implements UserServiceInt {
 	public void delelte(UserDTO dto) {
 		
 		dao.delete(dto);
+	}
+	
+	public UserDTO findByLogin(String login) {
+
+	return dao.findByLogin(login);
+	
 	}
 
 }

@@ -10,53 +10,69 @@ import com.rays.service.UserServiceInt;
 
 @Component("testUserService")
 public class TestUserService {
-	
+
 	@Autowired
 	public UserServiceInt service = null;
-	
-	public static void main(String[] args) {
-		
+
+	public static void main(String[] args) throws Exception {
+
 		ApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
 
 		TestUserService test = context.getBean("testUserService", TestUserService.class);
 
-	//	test.testAdd();
-	//	test.testUpdate();
-		test.testDelete();
+		// test.testAdd();
+		// test.testUpdate();
+		// test.testDelete();
+		//   test.testFindByLogin();
 
 	}
-	
-	public void testAdd() {	
-	 UserDTO dto = new UserDTO();
-	
-	        dto.setId(1);
-	        dto.setFirstName("Akbar");
-	        dto.setLastName("Mansuri");
-	        dto.setLogin("akbar@gmail.com");
-	        dto.setPassword("1234");
-	        
-	 long pk = service.add(dto);
-	 System.out.println("Data inserted: " + pk);
-	}
 
-	public void testUpdate () {
+	public void testAdd() throws Exception {
 		UserDTO dto = new UserDTO();
-		       
-		   dto.setFirstName("Amit");
-		   dto.setLastName("Kirar");
-		   dto.setLogin("amit@gmail.com");
-		   dto.setPassword("4321");
-		   dto.setId(2);
-		   
-	       service.update(dto);
-	       System.out.println("Data Updated");
+
+		dto.setId(1);
+		dto.setFirstName("Akbar");
+		dto.setLastName("Mansuri");
+		dto.setLogin("akbar@gmail.com");
+		dto.setPassword("1234");
+
+		long pk = service.add(dto);
+		System.out.println("Data inserted: " + pk);
 	}
-	
+
+	public void testUpdate() {
+		UserDTO dto = new UserDTO();
+
+		dto.setFirstName("Amit");
+		dto.setLastName("Kirar");
+		dto.setLogin("amit@gmail.com");
+		dto.setPassword("4321");
+		dto.setId(2);
+		service.update(dto);
+	}
+
 	public void testDelete() {
 		UserDTO dto = new UserDTO();
-		
-		   dto.setId(2);
-		   service.update(dto);
-		   System.out.println("Data Deleted");
+
+		dto.setId(2);
+		service.update(dto);
+	}
+
+	public void testFindByLogin() {
+
+		UserDTO dto = service.findByLogin("akbar@gmail.com");
+
+		if (dto != null) {
+
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		}
+		else {
+			System.out.println("E-mail Does Not Exist..!");
+		}
+
 	}
 }
