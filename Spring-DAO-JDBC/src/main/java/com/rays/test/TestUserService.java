@@ -1,5 +1,8 @@
 package com.rays.test;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -20,21 +23,23 @@ public class TestUserService {
 
 		TestUserService test = context.getBean("testUserService", TestUserService.class);
 
-		// test.testAdd();
+		 //test.testAdd();
 		// test.testUpdate();
 		// test.testDelete();
-		//   test.testFindByLogin();
+		// test.testFindByLogin();
+		// test.testAuthenticate();
+		 test.testSearch();
 
 	}
 
 	public void testAdd() throws Exception {
 		UserDTO dto = new UserDTO();
 
-		dto.setId(1);
-		dto.setFirstName("Akbar");
-		dto.setLastName("Mansuri");
-		dto.setLogin("akbar@gmail.com");
-		dto.setPassword("1234");
+		dto.setId(2);
+		dto.setFirstName("Shad");
+		dto.setLastName("Khan");
+		dto.setLogin("shad@gmail.com");
+		dto.setPassword("root");
 
 		long pk = service.add(dto);
 		System.out.println("Data inserted: " + pk);
@@ -69,10 +74,43 @@ public class TestUserService {
 			System.out.print("\t" + dto.getLastName());
 			System.out.print("\t" + dto.getLogin());
 			System.out.println("\t" + dto.getPassword());
-		}
-		else {
+		} else {
 			System.out.println("E-mail Does Not Exist..!");
 		}
 
+	}
+
+	public void testAuthenticate() {
+
+		UserDTO dto = service.authenticate("akbar@gmail.com", "1234");
+
+		if (dto != null) {
+
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		} else {
+			System.out.println("Invalid LoginId And Password..!");
+		}
+	}
+
+	public void testSearch() {
+
+		UserDTO dto = new UserDTO();
+
+	//	dto.setFirstName("Akbar");
+		
+		List<UserDTO> list = service.search(dto);
+
+		Iterator<UserDTO> it = list.iterator();
+
+		while (it.hasNext()) {
+			dto = it.next();
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		}
 	}
 }
