@@ -12,7 +12,7 @@ import com.rays.service.UserServiceInt;
 public class TestUserService {
 
 	@Autowired
-	private UserServiceInt userService = null;
+	private UserServiceInt service = null;
 
 	public static void main(String[] args) {
 
@@ -20,10 +20,12 @@ public class TestUserService {
 
 		TestUserService test = (TestUserService) context.getBean("testUserService");
 
-		test.testAdd();
+		//test.testAdd();
+		//test.testUpdate();
+		test.testDelete();
 	}
 
-	private void testAdd() {
+	public void testAdd() {
 
 		UserDTO dto = new UserDTO();
 
@@ -32,8 +34,29 @@ public class TestUserService {
 		dto.setLogin("akbar@gmail.com");
 		dto.setPassword("root");
 
-		long pk = userService.add(dto);
+		long pk = service.add(dto);
 		System.out.println("data added successfully: " + pk);
+	}
+	
+	public void testUpdate() {
+		
+		UserDTO dto = new UserDTO();
+		
+		dto.setId(1);
+		dto.setFirstName("Chetan");
+		dto.setLastName("Patidar");
+		dto.setLogin("chetan@gmail.com");
+		dto.setPassword("root");
+		 
+		service.update(dto);
+	}
+	
+	public void testDelete() {
+		
+		UserDTO dto = new UserDTO();
+		
+		dto.setId(2);
+		service.delete(dto);
 	}
 
 }

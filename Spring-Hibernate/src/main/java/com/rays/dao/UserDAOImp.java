@@ -16,19 +16,22 @@ public class UserDAOImp implements UserDAOInt {
 	private SessionFactory sessionFactory ;
 
 	public long add(UserDTO dto) {
+		
 		Session session = sessionFactory.getCurrentSession();
 		long pk = (Long)session.save(dto);
 		return pk;
 	}
 
 	public void update(UserDTO dto) {
-		// TODO Auto-generated method stub
 
+        Session session = sessionFactory.getCurrentSession();
+          session.update(dto);
 	}
 
 	public void delete(UserDTO dto) {
-		// TODO Auto-generated method stub
 
+		Session session = sessionFactory.getCurrentSession();
+		session.delete(dto);
 	}
 
 	public UserDTO findByPk(long pk) {
