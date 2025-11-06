@@ -11,21 +11,21 @@ import com.rays.dto.UserDTO;
 
 @Repository
 public class UserDAOImp implements UserDAOInt {
-	
+
 	@Autowired
-	private SessionFactory sessionFactory ;
+	private SessionFactory sessionFactory;
 
 	public long add(UserDTO dto) {
-		
+
 		Session session = sessionFactory.getCurrentSession();
-		long pk = (Long)session.save(dto);
+		long pk = (Long) session.save(dto);
 		return pk;
 	}
 
 	public void update(UserDTO dto) {
 
-        Session session = sessionFactory.getCurrentSession();
-          session.update(dto);
+		Session session = sessionFactory.getCurrentSession();
+		session.update(dto);
 	}
 
 	public void delete(UserDTO dto) {
@@ -34,14 +34,18 @@ public class UserDAOImp implements UserDAOInt {
 		session.delete(dto);
 	}
 
-	public UserDTO findByPk(long pk) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserDTO findByPk(long id) {
+
+		Session session = sessionFactory.getCurrentSession();
+        UserDTO user = session.get(UserDTO.class, id);
+		return user;
 	}
 
 	public UserDTO findByLogin(String login) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Session session = sessionFactory.getCurrentSession();
+        UserDTO user = session.get(UserDTO.class, login);
+		return user;
 	}
 
 	public UserDTO authenticate(String login, String password) {

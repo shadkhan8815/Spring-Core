@@ -12,7 +12,7 @@ public interface UserDAOInt {
 
 	public void delete(UserDTO dto);
 
-	public UserDTO findByPk(long pk);
+	public UserDTO findByPk(long id);
 
 	public UserDTO findByLogin(String login);
 

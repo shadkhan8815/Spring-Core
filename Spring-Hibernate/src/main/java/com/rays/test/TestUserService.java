@@ -20,9 +20,11 @@ public class TestUserService {
 
 		TestUserService test = (TestUserService) context.getBean("testUserService");
 
-		//test.testAdd();
-		//test.testUpdate();
-		test.testDelete();
+		// test.testAdd();
+		// test.testUpdate();
+		// test.testDelete();
+		// test.testFindByPk();
+		   test.testFindByLogin();
 	}
 
 	public void testAdd() {
@@ -37,26 +39,54 @@ public class TestUserService {
 		long pk = service.add(dto);
 		System.out.println("data added successfully: " + pk);
 	}
-	
+
 	public void testUpdate() {
-		
+
 		UserDTO dto = new UserDTO();
-		
+
 		dto.setId(1);
 		dto.setFirstName("Chetan");
 		dto.setLastName("Patidar");
 		dto.setLogin("chetan@gmail.com");
 		dto.setPassword("root");
-		 
+
 		service.update(dto);
 	}
-	
+
 	public void testDelete() {
-		
+
 		UserDTO dto = new UserDTO();
-		
 		dto.setId(2);
 		service.delete(dto);
 	}
 
+	public void testFindByPk() {
+
+		UserDTO dto = service.findByPk(1);
+
+		if (dto != null) {
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		} else {
+			System.out.println("Id Does Not Exist..!");
+		}
+	}
+
+	public void testFindByLogin() {
+
+		UserDTO dto = service.findByLogin("shad@gmail.com");
+
+		if (dto != null) {
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		} else {
+			System.out.println("E-mail Does Not Exist..!");
+		}
+	}
 }

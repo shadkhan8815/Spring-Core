@@ -31,14 +31,14 @@ public class UserServiceImp implements UserServiceInt {
         dao.delete(dto);
 	}
 
-	public UserDTO findByPk(long pk) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional(propagation = Propagation.REQUIRED)
+	public UserDTO findByPk(long id) {
+        return dao.findByPk(id);
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED)
 	public UserDTO findByLogin(String login) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.findByLogin(login);
 	}
 
 	public UserDTO authenticate(String login, String password) {
