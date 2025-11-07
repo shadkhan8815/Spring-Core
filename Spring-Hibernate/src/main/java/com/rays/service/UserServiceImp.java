@@ -31,29 +31,29 @@ public class UserServiceImp implements UserServiceInt {
         dao.delete(dto);
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED)
+	@Transactional(readOnly = true)
 	public UserDTO findByPk(long id) {
         return dao.findByPk(id);
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED)
+	@Transactional(readOnly = true)
 	public UserDTO findByLogin(String login) {
 		return dao.findByLogin(login);
 	}
 
+	@Transactional(readOnly = true)
 	public UserDTO authenticate(String login, String password) {
-		// TODO Auto-generated method stub
-		return null;
+         return   dao.authenticate(login, password);
 	}
 
+	@Transactional(readOnly = true)
 	public List<UserDTO> list() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.list();
 	}
 
+	@Transactional(readOnly = true)
 	public List<UserDTO> search(UserDTO dto, int pageNo, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.search(dto, pageNo, pageSize);
 	}
 
 }
