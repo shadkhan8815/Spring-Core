@@ -2,11 +2,11 @@
 <body>
 
      <div align="center">
-	<h2>Hello Welcome User..!</h2>
+	<h1>Hello Welcome User..!</h1>
 	<br>
 	&nbsp;
 	<br>
-	<a href="WelcomeCtl">Link:Welcome</a>
+	<h1><a href="WelcomeCtl">Link:Welcome</a></h1>
 	</div>
 	
 </body>

@@ -120,6 +120,7 @@ public class UserCtl {
 			dto = new UserDTO();
 			dto.setId(form.getId());
 			dto.setFirstName(form.getFirstName());
+			dto.setLogin(form.getLogin());
 		}
 
 		if (operation != null && operation.equals("delete")) {

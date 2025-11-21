@@ -42,7 +42,7 @@ public class LoginCtl {
 			@RequestParam(required = false) String operation, HttpSession session) {
 
 		if (operation.equals("signUp")) {
-			return "redirect:UserRegister";
+			return "redirect:UserRegistrationCtl";
 		}
 
 		if (bindingResult.hasErrors()) {

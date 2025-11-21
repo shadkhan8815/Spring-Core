@@ -21,7 +21,10 @@
 			<sf:hidden path="pageNo" />
 			<table>
 				<tr>
+				     <td>First Name:</td>
 					<td><sf:input path="firstName" />&nbsp; &nbsp;</td>
+					
+					<td>Login ID:</td>
 					<td><sf:select path="id">
 							<sf:option value="0">-----------select------------</sf:option>
 							<sf:options items="${userList}" itemValue="id"
@@ -52,7 +55,7 @@
 						<td><c:out value="${user.password }"></c:out></td>
 						<td><c:out value="${user.address }"></c:out></td>
 						<td align="center"><a
-							href="<c:url value="/ctl/User?id=${user.id}" />">edit</a></td>
+							href="<c:url value="/ctl/UserCtl?id=${user.id}" />">edit</a></td>
 					</tr>
 				</c:forEach>
 			</table>

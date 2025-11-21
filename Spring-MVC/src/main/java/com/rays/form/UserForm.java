@@ -4,7 +4,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class UserForm {
 	
-	protected long id = 0 ;
+	protected long id = 0l ;
 	
 	private Long[] ids ;
 	
