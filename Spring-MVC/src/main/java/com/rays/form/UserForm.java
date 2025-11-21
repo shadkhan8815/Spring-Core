@@ -1,38 +1,29 @@
-package com.rays.dto;
+package com.rays.form;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import org.hibernate.annotations.GenericGenerator;
-
-@Entity
-@Table(name = "st_userr")
-public class UserDTO {
-
-	@Id
-	@GeneratedValue(generator = "ncsPk")
-	@GenericGenerator(name = "ncsPk", strategy = "native")
-	@Column(name = "id", unique = true, nullable = false)
-	private long id;
+public class UserForm {
 	
-	@Column(name = "first_name")
+	protected long id = 0 ;
+	
+	private Long[] ids ;
+	
+	@NotEmpty
 	private String firstName;
-	
-	@Column(name = "last_name")
+
+	@NotEmpty
 	private String lastName;
-	
-	@Column(name = "login")
+
+	@NotEmpty
 	private String login;
-	
-	@Column(name = "password")
+
+	@NotEmpty
 	private String password;
-	
-	@Column(name = "address")
+
+	@NotEmpty
 	private String address;
 
+	private int pageNo;
 
 	public long getId() {
 		return id;
@@ -40,6 +31,14 @@ public class UserDTO {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public Long[] getIds() {
+		return ids;
+	}
+
+	public void setIds(Long[] ids) {
+		this.ids = ids;
 	}
 
 	public String getFirstName() {
@@ -73,13 +72,21 @@ public class UserDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public String getAddress() {
 		return address;
 	}
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public int getPageNo() {
+		return pageNo;
+	}
+
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
 	}
 
 }

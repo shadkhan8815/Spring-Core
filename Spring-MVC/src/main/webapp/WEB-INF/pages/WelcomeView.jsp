@@ -9,6 +9,7 @@
 <body>
     <div align="center">
         <h1>${message}</h1>
+        <a href="UserRegistrationCtl">RegistrationPage</a>
     </div>
 </body>
 </html>
